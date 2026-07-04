@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <title>app name</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="screen-1">
+
+      <p id="total-points"></p>
+
+      <button class="plus-one">study 1hr || +10</button>
+      <button class="plus-two">complete assignment || +5</button>
+      <button class="plus-two">sleep before 10.30 pm || +5</button>
+      <button class="plus-two">drink 3L || +5</button>
+      <button class="plus-two">wake up early on weekends (7 am - 9 am) || +5</button>
+      <button class="plus-two">walk 1500 steps on weekends || + 5</button>
+      <button class="plus-three">journaling || +2</button>
+      <button class="plus-three">draw || +2</button>
+
+      <div id="container-one">
+        <button id="new-goal">new goal</button>
+        <button id="hide-goal">hide</button>
+        <div id="image-inp">
+          <input type="file" id="imageinput" accept="image/*">
+          <div id="preview"></div>
+          <input id="set-point" type="number" placeholder="how much points for this">
+          <input id="name" type="text" placeholder="name">
+          <button id="done-btn">add</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="screen-2">   
+      <p class="wishlist-p">wishlist</p>
+      <div id="flex"></div>
+    </div>
+
+    <button id="reset-btn">.</button>
+    <button id="close">x</button>
+    
+
+  </body>
+  
+  <script src="script.js"></script>
+</html>
