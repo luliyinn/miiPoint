@@ -82,7 +82,7 @@ select {
   color:#00000000
 }
 
-#reset-btn:hover, #close:hover {
+#reset-btn:hover, #close:hover, #reset-btn-pts:hover {
   background-color: #0000001b;
 }
 
@@ -148,7 +148,7 @@ select {
   border:1px solid black;
   font-family: nintendo;
   background-image: linear-gradient(to bottom, #ffffff, #ffe298);
-  color: rgb(121, 65, 65);
+  color: rgb(79, 63, 63);
 }
 
 .plus-one {
@@ -259,7 +259,7 @@ select {
   border:none;
 }
 
-.plus-two:hover, .plus-one:hover, .plus-three:hover {
+.saved-task-item:hover {
   scale: 1.05;
   transition:scale 0.1s;
 }
@@ -271,4 +271,44 @@ select {
   background-image: url('ui/bg\ task.png');
   background-size: 40px;
   display: none;
+}
+
+.saved-task-item {
+  border-radius: 100px;
+  background-image: linear-gradient(to bottom, #ffffff, #ffcdf5);
+  border:1px solid black;
+  margin:5px 5px 0px 0px;
+}
+
+#confirmation, #confirmation-2 {
+  display: none;
+  border:1px solid black;
+  padding: 3px 1px 3px 1px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  text-align: center;
+  background-color: #ffffffa2;
+}
+
+#yes-btn, #yes-btn-2 {
+  border:1px solid black;
+  background-image:linear-gradient(to bottom, #deffde, #97f6a1);
+ 
+
+}
+
+#no-btn, #no-btn-2 {
+  border:1px solid black;
+  background-image:linear-gradient(to bottom, #ffe5e5, #eb4c4c);
+}
+
+#reset-btn-pts {
+  top: 335px;
+  left: 477px;
+  position: fixed;
+  width:30px;
+  border-radius: 100px;
+  background-color: #00000000;
+  border: none;
+  color:#00000000
 }

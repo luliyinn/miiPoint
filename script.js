@@ -31,7 +31,7 @@ const taskAdd = document.getElementById("task-add");
 
 const testPlaceholder = document.getElementById("test-placeholder");
 
-
+let taskList = JSON.parse(localStorage.getItem('mytaskList')) || [];
 // --- INITIAL LOAD ---
 totalPoint.innerHTML = point;
 // Load saved goals from storage
@@ -170,6 +170,22 @@ function createGoalCard(img, price, goalName, buyStatus) {
   divDetailSub.appendChild(newBuyButton)
   divDetailSub.appendChild(status)
   divDetailName.appendChild(nameFinal)
+
+  newDiv.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    document.getElementById('confirmation-2').style.display = 'block'
+
+      document.getElementById('yes-btn-2').onclick = function() {
+      newDiv.remove();
+      saveAllGoals();
+      confirmBox.style.display = 'none';
+    };
+
+    document.getElementById('no-btn-2').onclick = function() {
+      document.getElementById('confirmation-2').style.display = 'none'
+    }
+
+  })
   
   document.getElementById("flex").appendChild(newDiv)
 }
@@ -211,24 +227,96 @@ closeBtn.addEventListener('click', () => {
   window.electronAPI.quitApp();
   });
 
-pointsEarned.addEventListener('change', function() {
-  pointsEarnedValue = pointsEarned.value;
-  testPlaceholder.innerHTML = pointsEarnedValue
-})
+function createTaskElement(pointVal, nameVal, colorVal) {
+  const newTask = document.createElement('button');
+  newTask.innerHTML = pointVal + " || " + nameVal;
+  newTask.style.backgroundImage = `linear-gradient(to bottom, #ffffff, ${colorVal})`
+  newTask.className = 'saved-task-item'; 
 
-taskName.addEventListener('change', function() {
-  taskNameValue = taskName.value;
-  testPlaceholder.innerHTML = taskNameValue
-})
+  newTask.addEventListener('click', function() {
+    // Convert the pointVal string into a clean integer number
+    const pointsToAdd = parseInt(pointVal) || 0;
+    
+    // Use your existing addPoint function to update total points and save
+    addPoint(pointsToAdd); 
+  });
 
-taskColor.addEventListener('change', function() {
-  taskColorValue = taskColor.value;
-  testPlaceholder.style.color = taskColorValue
-})
+  newTask.addEventListener('contextmenu', function(e) {
+    e.preventDefault(); 
+    document.getElementById('confirmation').style.display = 'block'
 
-taskAdd.addEventListener('click', function() {
-  
-})
+    document.getElementById('yes-btn').addEventListener('click', function() {
+      newTask.remove()
+      taskList = taskList.filter(task => !(task.point === pointVal && task.name === nameVal && task.color === colorVal));
+      localStorage.setItem('mytaskList', JSON.stringify(taskList));
+      document.getElementById('confirmation').style.display = 'none'
+    })
+
+    document.getElementById('no-btn').addEventListener('click', function() {
+      document.getElementById('confirmation').style.display = 'none'
+    })
+    
+  })
+  document.getElementById('task-div').appendChild(newTask);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  taskList.forEach(task => {
+    // goal.point, goal.name, and goal.color come from our saved data structure
+    createTaskElement(task.point, task.name, task.color);
+  });
+});
+
+let pointValue = '';
+let nameValue = '';
+let colorValue = '';
+
+pointsEarned.addEventListener('input', function() { pointValue = pointsEarned.value; });
+taskName.addEventListener('input', function() { nameValue = taskName.value; });
+taskColor.addEventListener('input', function() { colorValue = taskColor.value; });
+
+function savelocalStorage() {
+  // 1. Grab values directly from inputs immediately on click (Prevents empty/blank bugs)
+  const currentPoint = pointsEarned.value || "0";
+  const currentName = taskName.value || "Unnamed Task";
+  const currentColor = taskColor.value || "#ffffff";
+
+  // 2. Build the object using clean variables
+  const newTaskObj = {
+    point: currentPoint,
+    name: currentName,
+    color: currentColor
+  };
+
+  // 3. Push the new object into your list array
+  taskList.push(newTaskObj);
+
+  // 4. Save the updated list array to localStorage
+  localStorage.setItem('mytaskList', JSON.stringify(taskList));
+
+  // 5. Draw the new button element on the screen right away
+  createTaskElement(currentPoint, currentName, currentColor);
+
+  // 7. Reset global tracking variables
+  pointValue = '';
+  nameValue = '';
+  colorValue = '';
+}
+
+// Attach the function to your button click
+taskAdd.addEventListener('click', savelocalStorage);
+
+const resetBtnPts = document.getElementById("reset-btn-pts");
+
+resetBtnPts.addEventListener('click', function() {
+  localStorage.removeItem("savedPoints");
+  point = 0;
+  window.location.reload();
+});
+
+
+
+
 
 
 
