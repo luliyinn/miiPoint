@@ -1,5 +1,5 @@
 {
-  "name": "point-system",
+  "name": "miiPoint",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
@@ -7,7 +7,7 @@
     "build": "electron-builder"
   },
   "build": {
-    "appId": "point-system",
+    "appId": "miiPoint",
     "win": {
       "target": [
         "nsis"
@@ -18,7 +18,7 @@
       "oneClick": false,
       "installerIcon": "ui/icon.ico",
       "uninstallerIcon": "ui/icon.ico",
-      "uninstallDisplayName": "point-system-uninstaller",
+      "uninstallDisplayName": "miiPoint-uninstaller",
       "license": "license.md",
       "allowToChangeInstallationDirectory": true
     }

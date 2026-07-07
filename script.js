@@ -36,7 +36,8 @@ totalPoint.innerHTML = point;
 const savedGoalsHTML = localStorage.getItem('goalCards');
 if (savedGoalsHTML) {
     document.getElementById("flex").innerHTML = savedGoalsHTML;
-    reattachBuyButtons(); 
+    reattachBuyButtons();
+    reattachDeleteButtons();
 }
 
 newGoal.addEventListener('click', function() {
@@ -276,7 +277,7 @@ taskColor.addEventListener('input', function() { colorValue = taskColor.value; }
 
 function savelocalStorage() {
   const currentPoint = pointsEarned.value || "0";
-  const currentName = taskName.value || "Unnamed Task";
+  const currentName = taskName.value || "unnamed task";
   const currentColor = taskColor.value || "#ffffff";
 
   const newTaskObj = {
@@ -355,6 +356,28 @@ otherBtn.addEventListener('click', function() {
 document.getElementById("close-info").addEventListener('click', function() {
   helpDiv.style.display = 'none'
 })
+
+function reattachDeleteButtons() {
+    const cards = document.querySelectorAll("#flex .wishlist-div");
+
+    cards.forEach(card => {
+        card.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+
+            document.getElementById('confirmation-2').style.display = 'block';
+
+            document.getElementById('yes-btn-2').onclick = function() {
+                card.remove();
+                saveAllGoals();
+                document.getElementById('confirmation-2').style.display = 'none';
+            };
+
+            document.getElementById('no-btn-2').onclick = function() {
+                document.getElementById('confirmation-2').style.display = 'none';
+            };
+        });
+    });
+}
 
 
 
