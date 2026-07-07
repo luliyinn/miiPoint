@@ -23,7 +23,7 @@
 </details>
 
 <details>
-  <summary><h2>Wishlist</h2></summary>
+  <summary><h2>Other</h2></summary>
   <img width="300" src="ui/Untitled222_20260706221836.png">
 </details>
   
